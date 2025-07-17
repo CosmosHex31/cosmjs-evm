@@ -1,0 +1,54 @@
+{
+  "name": "cosmjs-evm-monorepo-root",
+  "description": "Transaction codec and client to communicate with any evm and wasmd blockchain",
+  "private": true,
+  "author": "Ethan Frey <ethanfrey@users.noreply.github.com>",
+  "license": "Apache-2.0",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build/",
+    "*.md",
+    "!*.spec.*",
+    "!**/testdata/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CosmosHex31/cosmjs-evm"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "format": "yarn workspaces foreach --all --topological-dev --parallel --verbose run format",
+    "format-text": "prettier --write \"./*.md\" \"./docs/*.md\" && yarn workspaces foreach --all --topological-dev --parallel --verbose run format-text",
+    "format-shell": "shfmt -w scripts packages",
+    "lint": "yarn workspaces foreach --all --topological-dev --parallel --verbose run lint",
+    "lint-fix": "yarn workspaces foreach --all --topological-dev --parallel --verbose run lint-fix",
+    "test": "yarn workspaces foreach --all --topological-dev --parallel --verbose run test",
+    "test-firefox": "yarn workspaces foreach --all --topological-dev --parallel --verbose run test-firefox",
+    "test-chrome": "yarn workspaces foreach --all --topological-dev --parallel --verbose run test-chrome",
+    "coverage": "yarn workspaces foreach --all --topological-dev --parallel --verbose run coverage",
+    "build": "yarn workspaces foreach --all --topological-dev --parallel --verbose run build",
+    "docs": "yarn workspaces foreach --all --topological-dev --parallel --verbose run docs",
+    "pack-web": "yarn workspaces foreach --all --topological-dev --parallel --verbose run pack-web",
+    "publish-next": "yarn workspaces foreach --all --no-private exec yarn npm publish --tag next",
+    "publish-latest": "yarn workspaces foreach --all --no-private exec yarn npm publish"
+  },
+  "devDependencies": {
+    "@cosmjs-evm/amino": "workspace:^",
+    "@cosmjs-evm/cosmwasm-stargate": "workspace:^",
+    "@cosmjs-evm/crypto": "workspace:^",
+    "@cosmjs-evm/encoding": "workspace:^",
+    "@cosmjs-evm/proto-signing": "workspace:^",
+    "@cosmjs-evm/stargate": "workspace:^",
+    "eslint": "^8.57.1",
+    "prettier": "^3.5.3",
+    "typescript": "~5.8"
+  },
+  "packageManager": "yarn@4.9.2"
+}

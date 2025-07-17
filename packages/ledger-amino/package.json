@@ -1,0 +1,78 @@
+{
+  "name": "@cosmjs-evm/ledger-amino",
+  "version": "0.0.5",
+  "description": "A library for signing Amino-encoded transactions using Ledger devices",
+  "contributors": [
+    "Will Clark <willclarktech@users.noreply.github.com>"
+  ],
+  "license": "Apache-2.0",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "files": [
+    "build/",
+    "*.md",
+    "!*.spec.*",
+    "!**/testdata/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CosmosHex31/cosmjs-evm/tree/main/packages/ledger-amino"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "scripts": {
+    "docs": "typedoc --options typedoc.js",
+    "format": "prettier --write --log-level warn \"./src/**/*.ts\"",
+    "format-text": "prettier --write \"./*.md\"",
+    "lint": "eslint --max-warnings 0 \"./**/*.ts\" \"./{,demo/}*.js\"",
+    "lint-fix": "eslint --fix --max-warnings 0 \"./**/*.ts\" \"./{,demo/}*.js\"",
+    "build": "rm -rf ./build && tsc",
+    "build-or-skip": "[ -n \"$SKIP_BUILD\" ] || yarn build",
+    "test-node": "yarn node jasmine-testrunner.js",
+    "test": "yarn build-or-skip && yarn test-node",
+    "demo-node": "yarn build-or-skip && node ./demo/node.js",
+    "coverage": "nyc --reporter=text --reporter=lcov yarn test --quiet",
+    "pack-web": "yarn build-or-skip && webpack --mode development --config webpack.demo.config.js"
+  },
+  "dependencies": {
+    "@cosmjs-evm/amino": "workspace:^",
+    "@cosmjs-evm/crypto": "workspace:^",
+    "@cosmjs-evm/encoding": "workspace:^",
+    "@cosmjs-evm/math": "workspace:^",
+    "@cosmjs-evm/utils": "workspace:^",
+    "@zondax/ledger-cosmos-js": "^4.0.1",
+    "semver": "^7.5.2"
+  },
+  "devDependencies": {
+    "@cosmjs-evm/stargate": "workspace:^",
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@ledgerhq/hw-transport": "^6.31.4",
+    "@ledgerhq/hw-transport-node-hid": "^6.29.5",
+    "@ledgerhq/hw-transport-webusb": "^6.29.4",
+    "@types/jasmine": "^4",
+    "@types/semver": "^7.3.4",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint": "^8.57.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-node": "^0.3.4",
+    "eslint-plugin-import": "^2.25.0",
+    "eslint-plugin-prettier": "^5.5.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "esm": "^3.2.25",
+    "glob": "^10",
+    "jasmine": "^4",
+    "jasmine-spec-reporter": "^6",
+    "nyc": "^15.1.0",
+    "prettier": "^3.5.3",
+    "ses": "^1.13.0",
+    "source-map-support": "^0.5.19",
+    "ts-node": "^8",
+    "typedoc": "^0.28",
+    "typescript": "~5.8",
+    "webpack": "^5.76.0",
+    "webpack-cli": "^4.6.0"
+  }
+}
