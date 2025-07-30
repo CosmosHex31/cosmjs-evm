@@ -265,6 +265,7 @@ export class DirectSecp256k1HdWallet implements OfflineDirectSigner {
       algo: algo,
       pubkey: pubkey,
       address: address,
+      pubKeyType:""
     }));
   }
 
@@ -391,7 +392,8 @@ export class DirectSecp256k1HdWallet implements OfflineDirectSigner {
               algo: "secp256k1" as const,
               privkey: privkey,
               pubkey: Secp256k1.compressPubkey(pubkey),
-              address: await DirectSecp256k1HdWallet.getBech32AddressFromEVMAddress(address, prefix)
+              address: await DirectSecp256k1HdWallet.getBech32AddressFromEVMAddress(address, prefix),
+              pubKeyType: "/ethermint.crypto.v1.ethsecp256k1.PubKey"
             };
           default: 
             return {
@@ -399,6 +401,7 @@ export class DirectSecp256k1HdWallet implements OfflineDirectSigner {
               privkey: privkey,
               pubkey: pubkey,
               address: toBech32(prefix, rawSecp256k1PubkeyToRawAddress(pubkey)),
+              pubKeyType: "/cosmos.crypto.secp256k1.PubKey"
             };
         }
       }),

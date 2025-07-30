@@ -3,10 +3,12 @@ import { SignDoc } from "cosmjs-types/cosmos/tx/v1beta1/tx";
 
 export type Algo = "secp256k1" | "ed25519" | "sr25519";
 export interface AccountData {
+  // pubKeyType: string;
   /** A printable address (typically bech32 encoded) */
   readonly address: string;
   readonly algo: Algo;
   readonly pubkey: Uint8Array;
+  readonly pubKeyType: string;
 }
 
 export interface DirectSignResponse {

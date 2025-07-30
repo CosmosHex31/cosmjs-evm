@@ -28,6 +28,7 @@ describe("DirectSecp256k1Wallet", () => {
         address: defaultAddress,
         algo: "secp256k1",
         pubkey: defaultPubkey,
+        pubKeyType: "/cosmos.crypto.secp256k1.PubKey",
       });
     });
   });

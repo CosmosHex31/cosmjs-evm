@@ -453,9 +453,21 @@ export class SigningStargateClient extends StargateClient {
       coinType = pathToString(signerAny.accounts[0].hdPath).split('/')[2];
     }
         // const coinType = pathToString((this.signer as any).accounts[0].hdPath).split('/')[2];
-        if (coinType == "60'") {
-            pubkey.typeUrl = '/ethermint.crypto.v1.ethsecp256k1.PubKey';
-        }
+        // if (coinType == "60'") {
+        //     pubkey.typeUrl = '/ethermint.crypto.v1.ethsecp256k1.PubKey';
+        // }
+
+        
+        // const pubKeyType = (accountFromSigner as any).pubKeyType || (accountFromSigner as any).pubkeyType;
+        const checkPubKeyType =await this.signer.getAccounts()
+        // const accountWithType = {
+        //   ...checkPubKeyType[0],
+        //   pubKeyType: (this as any).pubKeyType, // or wherever you get the type from
+        // };
+        
+if (coinType == "60'" || checkPubKeyType[0].pubKeyType == '/ethermint.crypto.v1.ethsecp256k1.PubKey') {
+  pubkey.typeUrl = '/ethermint.crypto.v1.ethsecp256k1.PubKey';
+}
     
     const txBodyEncodeObject: TxBodyEncodeObject = {
       typeUrl: "/cosmos.tx.v1beta1.TxBody",
